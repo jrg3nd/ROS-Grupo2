@@ -2,7 +2,6 @@
 <robot name="roboto">
 
   <!-- Base del carrito de forma rectangular -->
-  <!-- Se le asignan las medidas, el color, la colisión y la inercia -->
   <link name="base_link">
     <visual>
       <geometry>
@@ -24,15 +23,15 @@
     </inertial>
   </link>
 
-  <!-- Link Rueda delantera izquierda -->
-  <!-- Se le asigna la longitud, el radio, el color, la colisión y la inercia -->
+  <!-- Rueda delantera izquierda -->
   <link name="front_left_wheel">
     <visual>
       <geometry>
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
-      <material name="black"/>
-      <color rgba="0.1 0.1 0.1 1.0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
     </visual>
     <collision>
       <geometry>
@@ -46,15 +45,15 @@
     </inertial>
   </link>
 
-  <!-- Link Rueda delantera derecha -->
-  <!-- Se le asigna la longitud, el radio, el color, la colisión y la inercia -->
+  <!-- Rueda delantera derecha -->
   <link name="front_right_wheel">
     <visual>
       <geometry>
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
-      <material name="black"/>
-      <color rgba="0.0 0.0 0.0 1.0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
     </visual>
     <collision>
       <geometry>
@@ -68,15 +67,15 @@
     </inertial>
   </link>
 
-  <!-- Link Rueda trasera izquierda -->
-  <!-- Se le asigna la longitud, el radio, el color, la colisión y la inercia -->
+  <!-- Rueda trasera izquierda -->
   <link name="rear_left_wheel">
     <visual>
       <geometry>
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
-      <material name="black"/>
-      <color rgba="0.0 0.0 0.0 1.0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
     </visual>
     <collision>
       <geometry>
@@ -90,15 +89,15 @@
     </inertial>
   </link>
 
-  <!-- Link Rueda trasera derecha -->
-  <!-- Se le asigna la longitud, el radio, el color, la colisión y la inercia -->
+  <!-- Rueda trasera derecha -->
   <link name="rear_right_wheel">
     <visual>
       <geometry>
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
-      <material name="black"/>
-      <color rgba="0.0 0.0 0.0 1.0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
     </visual>
     <collision>
       <geometry>
@@ -112,7 +111,7 @@
     </inertial>
   </link>
 
-  <!-- En esta sección son ingresados las uniones de las ruedas a la base del carrito, esto implica que el "padre" sera la base  -->
+  <!-- En esta sección son ingresados las uniones de las ruedas a la base del carrito  -->
   <!-- El primer joint es de la rueda delantera izquierda  -->
   <joint name="front_left_joint" type="continuous">
     <parent link="base_link"/>
