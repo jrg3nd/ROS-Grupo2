@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="roboto">
 
-  <!-- Base Link -->
+  <!-- Base del carrito de forma rectangular -->
   <link name="base_link">
     <visual>
       <geometry>
@@ -23,7 +23,7 @@
     </inertial>
   </link>
 
-  <!-- Front Left Wheel -->
+  <!-- Rueda delantera izquierda -->
   <link name="front_left_wheel">
     <visual>
       <geometry>
@@ -44,7 +44,7 @@
     </inertial>
   </link>
 
-  <!-- Front Right Wheel -->
+  <!-- Rueda delantera derecha -->
   <link name="front_right_wheel">
     <visual>
       <geometry>
@@ -65,7 +65,7 @@
     </inertial>
   </link>
 
-  <!-- Rear Left Wheel -->
+  <!-- Rueda trasera izquierda -->
   <link name="rear_left_wheel">
     <visual>
       <geometry>
@@ -86,7 +86,7 @@
     </inertial>
   </link>
 
-  <!-- Rear Right Wheel -->
+  <!-- Rueda trasera derecha -->
   <link name="rear_right_wheel">
     <visual>
       <geometry>
@@ -107,28 +107,32 @@
     </inertial>
   </link>
 
-  <!-- Wheel Joints -->
+  <!-- En esta sección son ingresados las uniones de las ruedas a la base del carrito  -->
+  <!-- El primer joint es de la rueda delantera izquierda  -->
   <joint name="front_left_joint" type="continuous">
     <parent link="base_link"/>
     <child link="front_left_wheel"/>
     <origin xyz="0.25 0.15 -0.1" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
-  
+
+  <!-- joint es de la rueda delantera derecha  -->
   <joint name="front_right_joint" type="continuous">
     <parent link="base_link"/>
     <child link="front_right_wheel"/>
     <origin xyz="0.25 -0.15 -0.1" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
-  
+
+ <!-- joint es de la rueda trasera izquierda -->
   <joint name="rear_left_joint" type="continuous">
     <parent link="base_link"/>
     <child link="rear_left_wheel"/>
     <origin xyz="-0.25 0.15 -0.1" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
-  
+
+  <!-- joint es de la rueda trasera derecha -->
   <joint name="rear_right_joint" type="continuous">
     <parent link="base_link"/>
     <child link="rear_right_wheel"/>
