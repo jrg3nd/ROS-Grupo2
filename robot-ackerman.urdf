@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<robot name="roboto">
+
+  <!-- Base central del robot (chasis) -->
+  <link name="base_link">
+    <visual>
+    <origin xyz="0.0 0.0 0.13" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.5 0.25 0.1"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="10.5 0.25 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="20.0"/>
+      <inertia ixx="1.0" iyy="1.0" izz="1.0" ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </inertial>
+  </link>
+
+  <!-- Definicion de los ejes como cubos -->
+   <!-- Delantero Izquierdo --> 
+  <link name="front_left_axle">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="wood"/>
+    </visual>
+  </link>
+   <!-- Delantero Derecho --> 
+  <link name="front_right_axle">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="wood"/>
+    </visual>
+  </link>
+  <!-- Trasero Izquierdo -->
+  <link name="rear_left_axle">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="wood"/>
+    </visual>
+  </link>
+  <!-- Trasero Derecho -->
+  <link name="rear_right_axle">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="wood"/>
+    </visual>
+  </link>
+
+  <!-- Definicion de ruedas -->
+  <!-- Delantera Izquierda -->
+  <link name="front_left_wheel">
+    <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Delantera Derecha -->
+  <link name="front_right_wheel">
+    <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Trasera Izquierda -->
+  <link name="rear_left_wheel">
+    <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Trasera Derecha -->
+  <link name="rear_right_wheel">
+    <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- JOINTS DE LOS EJES A LA BASE -->
+  <!-- Joints delanteros con direccion (revolute) -->
+  <joint name="front_left_axle_joint" type="revolute">
+    <origin xyz="0.25 0.125 0.13" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="front_left_axle"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="${-pi/3}" upper="${pi/3}" effort="500.0" velocity="1.0"/>
+  </joint>
+  <joint name="front_right_axle_joint" type="revolute">
+    <origin xyz="0.25 -0.125 0.13" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="front_right_axle"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="${-pi/3}" upper="${pi/3}" effort="500.0" velocity="1.0"/>
+  </joint>
+  <!-- Joints traseros sin direccion (fixed) -->
+  <joint name="rear_left_axle_joint" type="fixed">
+    <origin xyz="-0.25 0.125 0.13" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="rear_left_axle"/>
+  </joint>
+
+  <joint name="rear_right_axle_joint" type="fixed">
+    <origin xyz="-0.25 -0.125 0.13" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="rear_right_axle"/>
+  </joint>
+
+  <!-- JOINTS DE LAS RUEDAS A LOS EJES -->
+  <!-- Joint rueda delantera izquierda a eje izquierdo -->
+  <joint name="front_left_wheel_joint" type="continuous">
+    <origin xyz="0 0.05 -0.05" rpy="0 0 0"/>
+    <parent link="front_left_axle"/>
+    <child link="front_left_wheel"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <!-- Joint rueda delantera derecha a eje derecho -->
+  <joint name="front_right_wheel_joint" type="continuous">
+    <origin xyz="0 -0.05 -0.05" rpy="${-pi} 0 0"/>
+    <parent link="front_right_axle"/>
+    <child link="front_right_wheel"/>
+    <axis xyz="0 -1 0"/>
+  </joint>
+  <!-- Joint rueda trasera izquierda a eje izquierdo -->
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <origin xyz="0 0.05 -0.05" rpy="0 0 0"/>
+    <parent link="rear_left_axle"/>
+    <child link="rear_left_wheel"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <!-- Joint rueda trasera derecha a eje derecho -->
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <origin xyz="0 -0.05 -0.05" rpy="${-pi} 0 0"/>
+    <parent link="rear_right_axle"/>
+    <child link="rear_right_wheel"/>
+    <axis xyz="0 -1 0"/>
+  </joint>
+
+</robot>
