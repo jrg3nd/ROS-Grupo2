@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="roboto">
+
+  <!-- Macro para definir materiales -->
+  <xacro:macro name="material" params="name color">
+    <material name="${name}">
+      <color rgba="${color}"/>
+    </material>
+  </xacro:macro>
+
+  <!-- Macro para links -->
+  <xacro:macro name="link_box" params="name size origin_xyz origin_rpy material_name material_color">
+    <link name="${name}">
+      <visual>
+        <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+        <geometry>
+          <box size="${size}"/>
+        </geometry>
+        <xacro:material name="${material_name}" color="${material_color}"/>
+      </visual>
+      <collision>
+        <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+        <geometry>
+          <box size="${size}"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <!-- Macro para las ruedas -->
+  <xacro:macro name="link_wheel" params="name radius length origin_xyz origin_rpy">
+    <link name="${name}">
+      <visual>
+        <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}"/>
+        </geometry>
+        <xacro:material name="black" color="0.0 0.0 0.0 1.0"/>
+      </visual>
+      <collision>
+        <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <!-- Macro para joints -->
+  <xacro:macro name="joint" params="name type parent child origin_xyz origin_rpy axis lower upper effort velocity">
+    <joint name="${name}" type="${type}">
+      <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <axis xyz="${axis}"/>
+      <limit lower="${lower}" upper="${upper}" effort="${effort}" velocity="${velocity}"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Definiciones de materiales -->
+  <xacro:material name="grey" color="0.5 0.5 0.5 1.0"/>
+  <xacro:material name="red" color="1.0 0.0 0.0 1.0"/>
+  <xacro:material name="black" color="0.0 0.0 0.0 1.0"/>
+
+  <!-- Chasis del robot -->
+  <xacro:link_box name="base_link" size="0.5 0.25 0.1" origin_xyz="0.0 0.0 0.13" origin_rpy="0.0 0.0 0.0" material_name="grey" material_color="0.5 0.5 0.5 1.0"/>
+
+  <!-- Ejes -->
+  <xacro:link_box name="front_left_axle" size="0.1 0.1 0.1" origin_xyz="0 0 0" origin_rpy="0 0 0" material_name="red" material_color="1.0 0.0 0.0 1.0"/>
+  <xacro:link_box name="front_right_axle" size="0.1 0.1 0.1" origin_xyz="0 0 0" origin_rpy="0 0 0" material_name="red" material_color="1.0 0.0 0.0 1.0"/>
+  <xacro:link_box name="rear_left_axle" size="0.1 0.1 0.1" origin_xyz="0 0 0" origin_rpy="0 0 0" material_name="red" material_color="1.0 0.0 0.0 1.0"/>
+  <xacro:link_box name="rear_right_axle" size="0.1 0.1 0.1" origin_xyz="0 0 0" origin_rpy="0 0 0" material_name="red" material_color="1.0 0.0 0.0 1.0"/>
+
+  <!-- Ruedas -->
+  <xacro:link_wheel name="front_left_wheel" radius="0.08" length="0.1" origin_xyz="0.0 0.0 0.0" origin_rpy="${pi/2} 0.0 0.0"/>
+  <xacro:link_wheel name="front_right_wheel" radius="0.08" length="0.1" origin_xyz="0.0 0.0 0.0" origin_rpy="${pi/2} 0.0 0.0"/>
+  <xacro:link_wheel name="rear_left_wheel" radius="0.08" length="0.1" origin_xyz="0.0 0.0 0.0" origin_rpy="${pi/2} 0.0 0.0"/>
+  <xacro:link_wheel name="rear_right_wheel" radius="0.08" length="0.1" origin_xyz="0.0 0.0 0.0" origin_rpy="${pi/2} 0.0 0.0"/>
+
+  <!-- Joints -->
+  <xacro:joint name="front_left_axle_joint" type="revolute" parent="base_link" child="front_left_axle" origin_xyz="0.25 0.125 0.13" origin_rpy="0 0 0" axis="0 0 1" lower="${-pi/3}" upper="${pi/3}" effort="500.0" velocity="1.0"/>
+  <xacro:joint name="front_right_axle_joint" type="revolute" parent="base_link" child="front_right_axle" origin_xyz="0.25 -0.125 0.13" origin_rpy="0 0 0" axis="0 0 1" lower="${-pi/3}" upper="${pi/3}" effort="500.0" velocity="1.0"/>
+  <xacro:joint name="rear_left_axle_joint" type="fixed" parent="base_link" child="rear_left_axle" origin_xyz="-0.25 0.125 0.13" origin_rpy="0 0 0" axis="0 0 0" lower="0" upper="0" effort="0" velocity="0"/>
+  <xacro:joint name="rear_right_axle_joint" type="fixed" parent="base_link" child="rear_right_axle" origin_xyz="-0.25 -0.125 0.13" origin_rpy="0 0 0" axis="0 0 0" lower="0" upper="0" effort="0" velocity="0"/>
+
+  <!-- Joints de ruedas -->
+  <xacro:joint name="front_left_wheel_joint" type="continuous" parent="front_left_axle" child="front_left_wheel" origin_xyz="0 0.05 -0.05" origin_rpy="0 0 0" axis="0 1 0" lower="0" upper="0" effort="0" velocity="0"/>
+  <xacro:joint name="front_right_wheel_joint" type="continuous" parent="front_right_axle" child="front_right_wheel" origin_xyz="0 -0.05 -0.05" origin_rpy="${-pi} 0 0" axis="0 -1 0" lower="0" upper="0" effort="0" velocity="0"/>
+  <xacro:joint name="rear_left_wheel_joint" type="continuous" parent="rear_left_axle" child="rear_left_wheel" origin_xyz="0 0.05 -0.05" origin_rpy="0 0 0" axis="0 1 0" lower="0" upper="0" effort="0" velocity="0"/>
+  <xacro:joint name="rear_right_wheel_joint" type="continuous" parent="rear_right_axle" child="rear_right_wheel" origin_xyz="0 -0.05 -0.05" origin_rpy="${-pi} 0 0" axis="0 -1 0" lower="0" upper="0" effort="0" velocity="0"/>
+
+</robot>
