@@ -16,6 +16,10 @@ ros2 run robot_state_publisher robot_state_publisher /home/usuario/Escritorio/Ro
 
 Lo que hace es publicar las características sobre el estado del robot
 
-
+El siguiente comando publica las caracteristicas de los joint que tiene el robot, en este caso se encargan del movimiento de las ruedas:
 
 ros2 run joint_state_publisher_gui joint_state_publisher_guiros2 run robot_state_publisher robot_state_publisher /home/usuario/Escritorio/Robot_ackerman/src/ackerman_robot/urdf/Robot_ackerman.urdf
+
+Si se quiere visualizar de forma gráfica los topicos se utiliza el comando:
+
+rqt_gui rqt_gui
