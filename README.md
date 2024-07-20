@@ -10,4 +10,12 @@ se logra visualizar el carrito en el programa "RVIZ", junto con el "joint_state_
 
 El siguiente código es el llamado "ackerman.xacro", que corresponde a la modularización del urdf anterior.
 
-Para la visualización en gazeboo
+La vizualicación de los tópicos se hace posible con los siguientes comandos:
+
+ros2 run robot_state_publisher robot_state_publisher /home/usuario/Escritorio/Robot_ackerman/src/ackerman_robot/urdf/Robot_ackerman.urdf
+
+Lo que hace es publicar las características sobre el estado del robot
+
+
+
+ros2 run joint_state_publisher_gui joint_state_publisher_guiros2 run robot_state_publisher robot_state_publisher /home/usuario/Escritorio/Robot_ackerman/src/ackerman_robot/urdf/Robot_ackerman.urdf
