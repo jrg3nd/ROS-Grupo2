@@ -2,6 +2,11 @@
 En el presente github se encuentran los paquetes de ROS para la simulación de un robot tipo ackerman.
 La estructura del carrito es: dos ruedas delanteras (encargadas de la dirección del carrito), dos ruedas traseras y un chasis de forma rectangular.
 
+Con el objetivo de crear un espacio de trabajo claro y ordenado se creo el espacio de trabajo con el comando:
+
+ros2 pkg create --build-type ament_python ackerman_robot
+
+
 En los codigos presentes se encuentra el "ackerman.urdf", encargado de la descripción del robot con todos los respectivos links (uno para cada rueda y chasis) y joints (encargados de la union entre estructuras, junto con la ubicación de la unión).
 
 Con el comando "ros2 launch urdf_tutorial display.launch.py model:=(directorio de ubicacion del archivo)/ackerman.urdf
