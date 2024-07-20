@@ -1,4 +1,4 @@
-![693d3a41-7584-4733-a6f4-3aa4b39fb79c](https://github.com/user-attachments/assets/c558d40e-1a71-4ddb-82bb-f9a78127b282)
+
 # ROS-Grupo2
 En el presente github se encuentran los paquetes de ROS para la simulación de un robot tipo ackerman.
 La estructura del carrito es: dos ruedas delanteras (encargadas de la dirección del carrito), dos ruedas traseras y un chasis de forma rectangular.
