@@ -13,6 +13,7 @@ En los codigos presentes se encuentra el "ackerman.urdf", encargado de la descri
 Con el comando "ros2 launch urdf_tutorial display.launch.py model:=(directorio de ubicacion del archivo)/ackerman.urdf
 
 se logra visualizar el carrito en el programa "RVIZ", junto con el "joint_state_publisher" que permite manipular y comprobar que las ruedas avanzan y las delanteras logran girar de izquierda a derecha.
+
 ![movimiento izquierda](https://github.com/user-attachments/assets/c3439a4e-796a-41dc-beef-581c560ee937)
 
 ![movimiento derecha](https://github.com/user-attachments/assets/c7106e4a-1ba7-457e-8c25-482d91a1d0e9)
