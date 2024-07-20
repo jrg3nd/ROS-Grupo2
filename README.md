@@ -29,3 +29,5 @@ ros2 run joint_state_publisher_gui joint_state_publisher_guiros2 run robot_state
 Si se quiere visualizar de forma gráfica los topicos se utiliza el comando:
 
 rqt_gui rqt_gui
+
+![SAVE_20240719_234546](https://github.com/user-attachments/assets/906ca65f-f010-4b64-a69d-66ff38471ea3)
